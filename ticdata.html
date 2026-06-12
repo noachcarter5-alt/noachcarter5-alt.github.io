@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC 资料中心</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 80px;
+            font-family: "微软雅黑", sans-serif;
+            background-color: #f8f9fa;
+        }
+        h2 {
+            color: #1a2b48;
+            margin-bottom: 30px;
+        }
+        .back {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background: #1a2b48;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .date-text {
+            color: #666;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>TIC 调查局 资料中心</h2>
+    <p>这里将存放组织规程、案件记录、内部公告等相关文件。</p>
+    <p>目前暂无公开资料，敬请期待。</p>
+
+    <p class="date-text" id="nowDate"></p>
+
+    <a href="index.html" class="back">返回主页导航</a>
+
+    <script>
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const dateStr = `${year}年${month}月${day}日`;
+        document.getElementById('nowDate').innerText = "截止日期：" + dateStr;
+    </script>
+</body>
+</html>
