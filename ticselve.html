@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于 TIC 调查局</title>
+    <style>
+        body {
+            text-align: center;
+            padding-top: 80px;
+            font-family: "微软雅黑", sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        h2 {
+            color: #1a2b48;
+            margin-bottom: 30px;
+        }
+        .back {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background: #1a2b48;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .date-text {
+            color: #666;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .intro-box {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            line-height: 1.8;
+            color: #333;
+        }
+        .intro-box h3 {
+            color: #1a2b48;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>关于 TIC 调查局</h2>
+
+    <div class="intro-box">
+        <h3>我们是谁</h3>
+        <p>TIC 调查局是一个虚构的内部调查与事件管理组织，设定为独立于常规体系之外的特殊机构。我们的核心目标是处理非常规事件、维护内部秩序，并记录与整理所有相关规程与档案。</p>
+
+        <h3>我们的设定</h3>
+        <p>本组织的所有内容、设定与文件，均为原创虚构创作，不涉及任何真实机构、事件或个人。网站中的规程、公告与案件记录，仅作为设定背景的一部分，不具备任何现实法律效力。</p>
+
+        <h3>网站说明</h3>
+        <p>本网站为 TIC 调查局的虚拟官方站点，用于展示组织的基础设定、内部规程、资料档案与相关公告。网站中的所有内容，仅为创作用途，不代表任何真实立场或观点。</p>
+
+        <h3>联系我们</h3>
+        <p>目前本网站为静态展示站点，暂无公开联系方式。相关设定更新与内容补充，将随创作进度逐步发布。</p>
+    </div>
+
+    <p class="date-text" id="nowDate"></p>
+
+    <a href="index.html" class="back">返回主页导航</a>
+
+    <script>
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const weekArr = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+        const week = weekArr[now.getDay()];
+        const dateStr = `${year}年${month}月${day}日 ${week}`;
+        document.getElementById('nowDate').innerText = "当前日期：" + dateStr;
+    </script>
+</body>
+</html>
