@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>摄影权限 · 内部指引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f8f9fc 0%, #eef1f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            padding: 1.5rem;
+        }
+
+        .card {
+            max-width: 880px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            box-shadow: 0 20px 40px rgba(0, 20, 30, 0.12), 0 8px 24px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+            padding: 2.5rem 2.8rem;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 32px;
+            }
+        }
+
+        /* 页眉 */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .header-icon {
+            background: #1e293b;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .header h1 {
+            font-weight: 600;
+            font-size: 2rem;
+            letter-spacing: -0.02em;
+            color: #0b1a2a;
+            margin-right: auto;
+        }
+
+        .badge {
+            background: #d1dbe8;
+            color: #1e2f44;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+            background: rgba(30, 41, 59, 0.08);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 描述 */
+        .subhead {
+            color: #33475b;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2.2rem;
+            padding-left: 0.25rem;
+            border-left: 4px solid #9aaec9;
+            padding-left: 1rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 0 12px 12px 0;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 权限网格 */
+        .permission-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 550px) {
+            .permission-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .permission-item {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem 1.8rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+            transition: all 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .permission-item:hover {
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 20, 30, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .item-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .item-icon span {
+            font-size: 0.9rem;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 0.1rem 0.7rem;
+            border-radius: 30px;
+            color: #1e3a5f;
+            font-weight: 450;
+        }
+
+        .item-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #0a1a2b;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.4rem;
+        }
+
+        .item-desc {
+            color: #2c4058;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.9;
+            flex: 1;
+        }
+
+        .permission-tag {
+            margin-top: 1rem;
+            display: inline-block;
+            align-self: flex-start;
+            background: rgba(0, 0, 0, 0.04);
+            padding: 0.3rem 1rem;
+            border-radius: 60px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #1c3d5e;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(4px);
+        }
+
+        .tag-internal {
+            background: #1e3a5f;
+            color: white;
+            border-color: #1e3a5f;
+        }
+
+        .tag-contract {
+            background: #2b5f4a;
+            color: white;
+            border-color: #2b5f4a;
+        }
+
+        .tag-visitor {
+            background: #7f6b4b;
+            color: white;
+            border-color: #7f6b4b;
+        }
+
+        /* 额外规则版块 */
+        .extras {
+            margin-top: 2.2rem;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 30px;
+            padding: 1.8rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);
+        }
+
+        .extras h3 {
+            font-weight: 500;
+            font-size: 1rem;
+            letter-spacing: 0.02em;
+            color: #1f3f5c;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .extras ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.8rem;
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .extras li {
+            font-size: 0.95rem;
+            color: #1a3149;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .extras li::before {
+            content: "▹";
+            color: #1e3a5f;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .footnote {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #4b637b;
+            text-align: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.04);
+            padding-top: 1.8rem;
+            letter-spacing: 0.01em;
+            opacity: 0.7;
+        }
+
+        .footnote strong {
+            color: #1a3149;
+            font-weight: 500;
+        }
+
+        .highlight {
+            background: rgba(30, 58, 95, 0.06);
+            border-radius: 40px;
+            padding: 0.1rem 0.8rem;
+            font-weight: 450;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <!-- 头部 -->
+    <div class="header">
+        <div class="header-icon">📷</div>
+        <h1>摄影权限</h1>
+        <span class="badge">v1.0 · 内部</span>
+    </div>
+
+    <!-- 描述 -->
+    <div class="subhead">
+        ⚡ 基于场地与身份分级管理 · 内部人员、签约摄影师及访客适用。
+    </div>
+
+    <!-- 权限卡片网格 -->
+    <div class="permission-grid">
+        <!-- 内部人员 -->
+        <div class="permission-item">
+            <div class="item-icon">
+                🧑‍💼
+                <span>内部</span>
+            </div>
+            <div class="item-title">内部人员</div>
+            <div class="item-desc">
+                公司/组织正式成员，可在 <strong>所有公共区域</strong> 及 <strong>授权办公区</strong> 进行摄影。
+                需遵守内部保密协议。
+            </div>
+            <div class="permission-tag tag-internal">✔ 自由拍摄 · 报备制</div>
+        </div>
+
+        <!-- 签约摄影师 -->
+        <div class="permission-item">
+            <div class="item-icon">
+                🤝
+                <span>签约</span>
+            </div>
+            <div class="item-title">签约摄影师</div>
+            <div class="item-desc">
+                已签署年度合约的外部摄影师。可在 <strong>公共区域</strong> 及 <strong>指定活动场地</strong> 拍摄，
+                需提前 24 小时提交拍摄计划。
+            </div>
+            <div class="permission-tag tag-contract">📋 审批制 · 限时</div>
+        </div>
+
+        <!-- 访客 -->
+        <div class="permission-item">
+            <div class="item-icon">
+                🚶
+                <span>访客</span>
+            </div>
+            <div class="item-title">访客 / 临时</div>
+            <div class="item-desc">
+                无长期权限。仅允许在 <strong>大堂、展览区</strong> 等开放区域使用手机或便携相机拍摄，
+                禁止使用专业设备及三脚架。
+            </div>
+            <div class="permission-tag tag-visitor">🚫 限制区域 · 仅开放区</div>
+        </div>
+    </div>
+
+    <!-- 详细规则 + 内部补充 -->
+    <div class="extras">
+        <h3>📌 详细规则 · 内部人员特别说明</h3>
+        <ul>
+            <li><strong>内部人员</strong> 可在办公楼层、会议室、工位区拍摄，但需避免泄露敏感信息。</li>
+            <li>内部人员拍摄 <strong>内部活动、团建</strong> 无需额外申请，但需告知行政部。</li>
+            <li>签约摄影师仅可在 <strong>预约时段</strong> 进入拍摄区，且需佩戴访客证。</li>
+            <li>所有商业用途拍摄须单独签署 <strong>授权书</strong> (内部人员亦同)。</li>
+            <li>访客如需超出开放区拍摄，须由 <strong>内部人员陪同</strong> 并提前申请。</li>
+        </ul>
+    </div>
+
+    <!-- 底部脚注 -->
+    <div class="footnote">
+        <strong>内部人员</strong> 享有最高权限 · 签约摄影师及访客权限以最新版《摄影管理规定》为准 ·
+        本页仅作参考，最终解释权归行政管理部。
+    </div>
+</div>
+</body>
+</html>
