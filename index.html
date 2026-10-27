@@ -1,7 +1,356 @@
 <!DOCTYPE html>
-<html>
-<body style="background:#112244;color:white;text-align:center;padding-top:120px;font-size:24px">
-<h1>网站正在升级维护中</h1>
-<p>预计在2026年10月29日开放，谢谢理解</p>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC INVESTIGATION</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+            list-style: none;
+            text-decoration: none;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+        }
+
+        /* ========== 顶部Logo区 ========== */
+        .top-logo {
+            text-align: center;
+            padding: 35px 0;
+            font-size: 46px;
+            font-weight: bold;
+            color: #1a2b48;
+            letter-spacing: 10px;
+            background: #fff;
+            border-bottom: 1px solid #e6e9ef;
+        }
+
+        /* ========== 主导航栏 ========== */
+        .nav-box {
+            width: 100%;
+            background: #fff;
+            border-top: 2px solid #1a2b48;
+            border-bottom: 2px solid #1a2b48;
+            position: sticky;
+            top: 0;
+            z-index: 9999; /* 层级拉满，彻底解决下拉遮挡 */
+        }
+        .nav-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        /* 主菜单项 */
+        .nav-item {
+            position: relative;
+        }
+        .nav-item > a {
+            display: block;
+            padding: 18px 32px;
+            font-size: 17px;
+            color: #222;
+            transition: color 0.2s;
+        }
+        /* 鼠标悬停主菜单：字变红 */
+        .nav-item:hover > a {
+            color: #d9232e;
+        }
+
+        /* ========== 下拉子菜单 ========== */
+        .sub-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 180px;
+            background: #fff;
+            border: 1px solid #e6e9ef;
+            border-top: 2px solid #d9232e;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: none;
+            z-index: 9999; /* 下拉菜单单独加高层级 */
+        }
+        .sub-menu li a {
+            display: block;
+            padding: 12px 20px;
+            font-size: 15px;
+            color: #444;
+            border-bottom: 1px solid #f0f2f5;
+            transition: all 0.2s;
+        }
+        .sub-menu li a:hover {
+            color: #d9232e;
+            background: #fafbfc;
+            padding-left: 25px;
+        }
+        /* 鼠标悬停主菜单：显示子菜单 */
+        .nav-item:hover .sub-menu {
+            display: block;
+        }
+
+        /* ========== 资讯板块 ========== */
+        .news-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            font-size: 26px;
+            color: #1a2b48;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #d9232e;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .news-card {
+            background: #fff;
+            border-radius: 6px;
+            padding: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .news-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .news-date {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .news-title {
+            font-size: 17px;
+            color: #222;
+            margin-bottom: 12px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+        .news-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ========== 底部大站风格页脚 ========== */
+        .footer {
+            background: #1a2b48;
+            color: #c8d0e0;
+            margin-top: 60px;
+            padding-top: 40px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #2e3f5e;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+        .footer-col li {
+            margin-bottom: 10px;
+        }
+        .footer-col li a {
+            color: #c8d0e0;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+        .footer-col li a:hover {
+            color: #fff;
+        }
+        .footer-copyright {
+            text-align: center;
+            padding: 20px 0;
+            color: #8a94a8;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部Logo 已改为英文 -->
+    <div class="top-logo">TIC INVESTIGATION</div>
+
+    <!-- 主导航 + 下拉菜单 遮挡已修复 -->
+    <div class="nav-box">
+        <ul class="nav-list">
+            <!-- 首页 -->
+            <li class="nav-item">
+                <a href="index.html">首页</a>
+                <ul class="sub-menu">
+                    <li><a href="#">最新动态</a></li>
+                    <li><a href="#">热点事件</a></li>
+                    <li><a href="#">公告通知</a></li>
+                </ul>
+            </li>
+
+            <!-- 关于法律 -->
+            <li class="nav-item">
+                <a href="ticslaw.html">关于法律</a>
+                <ul class="sub-menu">
+                    <li><a href="#">调查准则</a></li>
+                    <li><a href="#">合规说明</a></li>
+                    <li><a href="#">权限边界</a></li>
+                </ul>
+            </li>
+
+            <!-- 关于暂停事件调查 -->
+            <li class="nav-item">
+                <a href="ticlaw.html">暂停事件调查</a>
+                <ul class="sub-menu">
+                    <li><a href="#">事件档案</a></li>
+                    <li><a href="#">案例汇总</a></li>
+                    <li><a href="#">调查流程</a></li>
+                </ul>
+            </li>
+
+            <!-- 关于摄影 -->
+            <li class="nav-item">
+                <a href="tictp.html">关于摄影</a>
+                <ul class="sub-menu">
+                    <li><a href="#">现场规范</a></li>
+                    <li><a href="#">器材清单</a></li>
+                    <li><a href="#">素材归档</a></li>
+                </ul>
+            </li>
+
+            <!-- 资料 -->
+            <li class="nav-item">
+                <a href="ticdata.html">资料中心</a>
+                <ul class="sub-menu">
+                    <li><a href="#">实验记录</a></li>
+                    <li><a href="#">卷宗库</a></li>
+                    <li><a href="#">技术文档</a></li>
+                </ul>
+            </li>
+
+            <!-- 关于我们 -->
+            <li class="nav-item">
+                <a href="ticselve.html">关于我们</a>
+                <ul class="sub-menu">
+                    <li><a href="#">团队介绍</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">联系方式</a></li>
+                </ul>
+            </li>
+
+            <!-- 外部链接 -->
+            <li class="nav-item">
+                <a href="https://github.com">外部链接</a>
+                <ul class="sub-menu">
+                    <li><a href="#">协作平台</a></li>
+                    <li><a href="#">参考资源</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 最新资讯 / 资料板块 新增网页大更新 -->
+    <section class="news-section">
+        <h2 class="section-title">最新资讯 · 资料更新</h2>
+        <div class="news-container">
+            <!-- 新增：网页大更新头条 -->
+            <div class="news-card">
+                <div class="news-date">2026-10-27 · 站点公告</div>
+                <div class="news-title">TIC官方调查站点完成重大版本更新</div>
+                <div class="news-desc">
+                    全站视觉风格与导航架构全面升级，新增下拉分类菜单、多列底部导航与资料卡片模块，内部资料库同步完成结构优化，访问与查阅效率大幅提升。
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-date">2026-10-25 · 团队动态</div>
+                <div class="news-title">TIC调查组新增三名专项成员</div>
+                <div class="news-desc">
+                    团队近期吸纳三名不同领域专项调查员，分别负责现场物证分析、异常现象还原与数据归档工作，进一步扩充多场景调查能力。
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-date">2026-10-22 · 实验进展</div>
+                <div class="news-title">多类暂停事件模拟实验完成</div>
+                <div class="news-desc">
+                    实验室完成五组不同环境下的暂停现象对照实验，采集到关键光影与时间差数据，相关报告已录入内部资料库。
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-date">2026-10-18 · 资料更新</div>
+                <div class="news-title">事件资料库完成月度归档</div>
+                <div class="news-desc">
+                    本月共新增12份现场卷宗、8份实验记录与3份规范文档，全部完成分类编号与加密存储，可在内部资料区查阅。
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-date">2026-10-10 · 规范发布</div>
+                <div class="news-title">现场摄影勘察规范V2.0启用</div>
+                <div class="news-desc">
+                    摄影组更新现场勘察拍摄标准，新增异常点位标记流程与素材命名规则，所有外勤调查即日起按新版规范执行。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 底部大站风格页脚 -->
+    <div class="footer">
+        <div class="footer-inner">
+            <div class="footer-col">
+                <h4>关于TIC</h4>
+                <ul>
+                    <li><a href="#">团队简介</a></li>
+                    <li><a href="#">成立背景</a></li>
+                    <li><a href="#">核心宗旨</a></li>
+                    <li><a href="#">发展历程</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>资料专区</h4>
+                <ul>
+                    <li><a href="#">公开卷宗</a></li>
+                    <li><a href="#">实验报告</a></li>
+                    <li><a href="#">技术手册</a></li>
+                    <li><a href="#">下载中心</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>规范制度</h4>
+                <ul>
+                    <li><a href="#">调查守则</a></li>
+                    <li><a href="#">保密协议</a></li>
+                    <li><a href="#">外勤流程</a></li>
+                    <li><a href="#">安全须知</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>反馈联系</h4>
+                <ul>
+                    <li><a href="#">问题反馈</a></li>
+                    <li><a href="#">合作申请</a></li>
+                    <li><a href="#">加入我们</a></li>
+                    <li><a href="#">站内留言</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            © 2026 TIC INVESTIGATION · 内部调查资料站点 · All Rights Reserved
+        </div>
+    </div>
 </body>
 </html>
