@@ -18,7 +18,7 @@
             color: #333;
         }
 
-        /* ========== 顶部Logo区 ========== */
+        /* 顶部Logo标题 */
         .top-logo {
             text-align: center;
             padding: 28px 0;
@@ -30,7 +30,7 @@
             border-bottom: 1px solid #e6e9ef;
         }
 
-        /* ========== 主导航栏 ========== */
+        /* 导航栏 */
         .nav-box {
             width: 100%;
             background: #fff;
@@ -57,11 +57,10 @@
             color: #222;
             transition: color 0.2s;
         }
-        .nav-item:hover > a {
+        .nav-item > a:hover {
             color: #d9232e;
         }
-
-        /* ========== 下拉子菜单 ========== */
+        /* 下拉子菜单 */
         .sub-menu {
             position: absolute;
             top: 100%;
@@ -87,59 +86,66 @@
             background: #fafbfc;
             padding-left: 22px;
         }
-        .nav-item:hover .sub-menu {
-            display: block;
+        /* PC悬浮展开 */
+        @media(min-width:769px){
+            .nav-item:hover .sub-menu{
+                display:block;
+            }
+        }
+        /* ========== 手机端JS控制：点击展开，主菜单不跳转 ========== */
+        @media(max-width:768px){
+            .sub-menu.active{
+                display:block;
+            }
         }
 
-        /* ========== 资讯板块 ========== */
+        /* 资讯区域 */
         .news-section {
             max-width: 1200px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding:0 20px;
         }
-        .section-title {
-            font-size: 22px;
-            color: #1a2b48;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #d9232e;
-            display: inline-block;
-            margin-bottom: 24px;
+        .section-title{
+            font-size:22px;
+            color:#1a2b48;
+            padding-bottom:10px;
+            border-bottom:3px solid #d9232e;
+            margin-bottom:24px;
         }
-        .news-container {
+        .news-container{
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+            gap:20px;
         }
-        .news-card {
-            background: #fff;
-            border-radius: 6px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .news-card{
+            background:#fff;
+            border-radius:6px;
+            padding:20px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.06);
+            transition:transform 0.2s;
         }
-        .news-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        .news-card:hover{
+            transform: translateY(-4px);
         }
-        .news-date {
-            font-size: 12px;
-            color: #999;
-            margin-bottom: 8px;
+        .news-date{
+            font-size:12px;
+            color:#999;
+            margin-bottom:8px;
         }
-        .news-title {
-            font-size: 16px;
-            color: #222;
-            margin-bottom: 10px;
-            font-weight: bold;
-            line-height: 1.4;
+        .news-title{
+            font-size:16px;
+            font-weight:bold;
+            color:#222;
+            margin-bottom:10px;
+            line-height:1.4;
         }
-        .news-desc {
-            font-size: 13px;
-            color: #666;
-            line-height: 1.6;
+        .news-desc{
+            font-size:13px;
+            color:#666;
+            line-height:1.6;
         }
 
-        /* ========== 页脚（已改为左右两竖列） ========== */
+        /* 页脚 两竖列布局 */
         .footer {
             background: #1a2b48;
             color: #c8d0e0;
@@ -150,7 +156,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            /* 核心：固定两竖列，不再挤一行 */
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 35px 60px;
@@ -180,7 +185,7 @@
             font-size: 12px;
         }
 
-        /* ========== 小屏幕自适应 ========== */
+        /* 移动端适配 */
         @media (max-width: 768px) {
             .top-logo {
                 font-size: 26px;
@@ -191,9 +196,6 @@
                 padding: 12px 16px;
                 font-size: 14px;
             }
-            .section-title {
-                font-size: 20px;
-            }
             .footer-inner {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -202,10 +204,8 @@
     </style>
 </head>
 <body>
-    <!-- 顶部Logo -->
     <div class="top-logo">TIC INVESTIGATION</div>
 
-    <!-- 主导航 + 下拉菜单 -->
     <div class="nav-box">
         <ul class="nav-list">
             <li class="nav-item">
@@ -216,42 +216,42 @@
                     <li><a href="#">公告通知</a></li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="ticslaw.html">关于法律</a>
+            <li class="nav-item mobile-toggle">
+                <a href="javascript:void(0)">关于法律</a>
                 <ul class="sub-menu">
-                    <li><a href="#">调查准则</a></li>
+                    <li><a href="ticslaw.html">调查准则</a></li>
                     <li><a href="#">合规说明</a></li>
                     <li><a href="#">权限边界</a></li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="ticlaw.html">暂停事件调查</a>
+            <li class="nav-item mobile-toggle">
+                <a href="javascript:void(0)">暂停事件调查</a>
                 <ul class="sub-menu">
                     <li><a href="#">事件档案</a></li>
                     <li><a href="#">案例汇总</a></li>
-                    <li><a href="#">调查流程</a></li>
+                    <li><a href="ticlaw.html">调查流程</a></li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="tictp.html">关于摄影</a>
+            <li class="nav-item mobile-toggle">
+                <a href="javascript:void(0)">关于摄影</a>
                 <ul class="sub-menu">
-                    <li><a href="#">现场规范</a></li>
+                    <li><a href="tictp.html">现场规范</a></li>
                     <li><a href="#">器材清单</a></li>
                     <li><a href="#">素材归档</a></li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="ticdata.html">资料中心</a>
+            <li class="nav-item mobile-toggle">
+                <a href="javascript:void(0)">资料中心</a>
                 <ul class="sub-menu">
-                    <li><a href="#">实验记录</a></li>
+                    <li><a href="ticdata.html">实验记录</a></li>
                     <li><a href="#">卷宗库</a></li>
                     <li><a href="#">技术文档</a></li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <a href="ticselve.html">关于我们</a>
+            <li class="nav-item mobile-toggle">
+                <a href="javascript:void(0)">关于我们</a>
                 <ul class="sub-menu">
-                    <li><a href="#">团队介绍</a></li>
+                    <li><a href="ticselve.html">团队介绍</a></li>
                     <li><a href="#">加入我们</a></li>
                     <li><a href="#">联系方式</a></li>
                 </ul>
@@ -266,55 +266,35 @@
         </ul>
     </div>
 
-    <!-- 资讯板块 -->
-    <section class="news-section">
-        <h2 class="section-title">最新资讯 · 资料更新</h2>
+    <!-- 资讯板块，包含TIC网页大更新公告 -->
+    <div class="news-section">
+        <h2 class="section-title">最新资讯</h2>
         <div class="news-container">
             <div class="news-card">
                 <div class="news-date">2026-10-27 · 站点公告</div>
-                <div class="news-title">TIC官方调查站点完成重大版本更新</div>
-                <div class="news-desc">
-                    全站视觉风格与导航架构全面升级，新增下拉分类菜单、多列底部导航与资料卡片模块，内部资料库同步完成结构优化，访问与查阅效率大幅提升。
-                </div>
+                <div class="news-title">TIC官方站点重大版本更新</div>
+                <div class="news-desc">全站导航结构重新调整，主菜单不再直接跳转，全部子项独立链接，配套规程页面陆续上线。</div>
             </div>
             <div class="news-card">
                 <div class="news-date">2026-10-25 · 团队动态</div>
                 <div class="news-title">TIC调查组新增三名专项成员</div>
-                <div class="news-desc">
-                    团队近期吸纳三名不同领域专项调查员，分别负责现场物证分析、异常现象还原与数据归档工作，进一步扩充多场景调查能力。
-                </div>
+                <div class="news-desc">扩充专项调查小组编制，完善事件档案录入与资料归档相关工作流程。</div>
             </div>
             <div class="news-card">
-                <div class="news-date">2026-10-22 · 实验进展</div>
-                <div class="news-title">多类暂停事件模拟实验完成</div>
-                <div class="news-desc">
-                    实验室完成五组不同环境下的暂停现象对照实验，采集到关键光影与时间差数据，相关报告已录入内部资料库。
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-date">2026-10-18 · 资料更新</div>
-                <div class="news-title">事件资料库完成月度归档</div>
-                <div class="news-desc">
-                    本月共新增12份现场卷宗、8份实验记录与3份规范文档，全部完成分类编号与加密存储，可在内部资料区查阅。
-                </div>
-            </div>
-            <div class="news-card">
-                <div class="news-date">2026-10-10 · 规范发布</div>
-                <div class="news-title">现场摄影勘察规范V2.0启用</div>
-                <div class="news-desc">
-                    摄影组更新现场勘察拍摄标准，新增异常点位标记流程与素材命名规则，所有外勤调查即日起按新版规范执行。
-                </div>
+                <div class="news-date">2026-10-22 · 专项通知</div>
+                <div class="news-title">暂停事件专项调查规程更新完成</div>
+                <div class="news-desc">新版调查专项规定修订完毕，可前往暂停事件调查下拉菜单查看完整文档。</div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- 页脚：左竖列2组，右竖列2组 -->
+    <!-- 两列页脚 -->
     <div class="footer">
         <div class="footer-inner">
             <div class="footer-col">
                 <h4>关于TIC</h4>
                 <ul>
-                    <li><a href="#">团队简介</a></li>
+                    <li><a href="ticselve.html">团队简介</a></li>
                     <li><a href="#">成立背景</a></li>
                     <li><a href="#">核心宗旨</a></li>
                     <li><a href="#">发展历程</a></li>
@@ -323,28 +303,28 @@
             <div class="footer-col">
                 <h4>资料专区</h4>
                 <ul>
-                    <li><a href="#">公开卷宗</a></li>
+                    <li><a href="ticdata.html">公开卷宗</a></li>
                     <li><a href="#">实验报告</a></li>
                     <li><a href="#">技术手册</a></li>
-                    <li><a href="#">下载中心</a></li>
+                    <li><a href="#">资源下载</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>规范制度</h4>
                 <ul>
-                    <li><a href="#">调查守则</a></li>
+                    <li><a href="ticslaw.html">调查守则</a></li>
                     <li><a href="#">保密协议</a></li>
                     <li><a href="#">外勤流程</a></li>
-                    <li><a href="#">安全须知</a></li>
+                    <li><a href="#">安全条例</a></li>
                 </ul>
             </div>
             <div class="footer-col">
-                <h4>反馈联系</h4>
+                <h4>联系反馈</h4>
                 <ul>
-                    <li><a href="#">问题反馈</a></li>
-                    <li><a href="#">合作申请</a></li>
-                    <li><a href="#">加入我们</a></li>
-                    <li><a href="#">站内留言</a></li>
+                    <li><a href="#">问题提交</a></li>
+                    <li><a href="#">合作洽谈</a></li>
+                    <li><a href="#">申请加入</a></li>
+                    <li><a href="#">留言板块</a></li>
                 </ul>
             </div>
         </div>
@@ -352,5 +332,27 @@
             © 2026 TIC INVESTIGATION · 内部调查资料站点 · All Rights Reserved
         </div>
     </div>
+
+    <!-- JS：手机端点击展开下拉，主菜单不会跳转 -->
+    <script>
+        const toggleItems = document.querySelectorAll('.mobile-toggle > a');
+        toggleItems.forEach(item=>{
+            item.onclick = function(e){
+                e.preventDefault();
+                const submenu = this.nextElementSibling;
+                // 关闭其他已经打开的下拉
+                document.querySelectorAll('.sub-menu.active').forEach(sm=>{
+                    if(sm!==submenu) sm.classList.remove('active');
+                })
+                submenu.classList.toggle('active');
+            }
+        })
+        // 点击页面空白，收起下拉菜单
+        document.addEventListener('click',function(e){
+            if(!e.target.closest('.mobile-toggle')){
+                document.querySelectorAll('.sub-menu.active').forEach(sm=>sm.classList.remove('active'));
+            }
+        })
+    </script>
 </body>
 </html>
