@@ -18,21 +18,17 @@
             color: #333;
         }
 
-        /* 右上角悬浮按钮 */
-        .top-right-btn{
+        /* ========== 右上角纯Logo，无点击跳转 ========== */
+        .top-right-logo{
             position: fixed;
             top:20px;
             right:20px;
             z-index:10000;
-            padding:8px 16px;
-            background:#1a2b48;
-            color:#fff;
-            border-radius:6px;
-            font-size:14px;
-            transition:0.2s;
+            width:56px;
         }
-        .top-right-btn:hover{
-            background:#d9232e;
+        .top-right-logo img{
+            width:100%;
+            border-radius:8px;
         }
 
         /* 顶部Logo标题 */
@@ -109,7 +105,7 @@
                 display:block;
             }
         }
-        /* ========== 手机端JS控制：点击展开，主菜单不跳转 ========== */
+        /* 手机端JS控制：点击展开，主菜单不跳转 */
         @media(max-width:768px){
             .sub-menu.active{
                 display:block;
@@ -221,8 +217,10 @@
     </style>
 </head>
 <body>
-    <!-- 右上角悬浮按钮 -->
-    <a href="index.html" class="top-right-btn">返回主页</a>
+    <!-- 右上角纯Logo，无链接，图片IMG_5715.jpeg -->
+    <div class="top-right-logo">
+        <img src="IMG_5715.jpeg" alt="TIC标识">
+    </div>
 
     <div class="top-logo">TIC INVESTIGATION</div>
 
