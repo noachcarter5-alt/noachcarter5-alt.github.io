@@ -3,324 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>申请加入</title>
+    <title>跳转中...</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, sans-serif;
-        }
-        body {
-            background-color: #f4f6f8;
-            padding: 50px 15px 30px;
-        }
-        /* 顶部滑入提示 */
-        .toast{
-            position:fixed;
-            top:-60px;
-            left:50%;
-            transform:translateX(-50%);
-            background:#222;
-            color:#fff;
-            padding:12px 24px;
-            border-radius:8px;
-            font-size:14px;
-            z-index:200;
-            transition:top 0.3s ease;
-        }
-        .toast.show{
-            top:20px;
-        }
-        /* 左上角返回按钮 */
-        .home-back{
-            position:fixed;
-            top:12px;
-            left:12px;
-            z-index:99;
-        }
-        .home-back a{
-            background:#2b4b80;
-            color:#fff;
-            text-decoration:none;
-            padding:6px 12px;
-            border-radius:6px;
-            font-size:14px;
-        }
-        .home-back a:hover{
-            background:#203864;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 32px;
-            border-radius: 12px;
-            box-shadow: 0 2px 12px #00000018;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 26px;
-            color: #222;
-        }
-        .form-item {
-            margin-bottom: 18px;
-        }
-        .label-row{
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            height:100vh;
             display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:6px;
-        }
-        label {
-            color: #333;
-            font-weight: 500;
-        }
-        .toggle-btn{
-            font-size:13px;
-            color:#2b4b80;
-            cursor:pointer;
-            background:none;
-            border:none;
-            padding:0;
-        }
-        .toggle-btn:hover{
-            text-decoration:underline;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd0d8;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .hide{
-            display:none;
-        }
-        button {
-            width: 100%;
-            padding: 13px;
-            background-color: #2b4b80;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 17px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #203864;
-        }
-        .tip {
-            margin-top:20px;
-            font-size:14px;
-            color:#666;
-            text-align:center;
-        }
-        /* 弹窗修复：解决点下一步弹不出弹窗 */
-        .modal-wrap{
-            display:none;
-            position:fixed;
-            top:0;
-            left:0;
-            width:100%;
-            height:100%;
-            background:rgba(0,0,0,0.5);
             align-items:center;
             justify-content:center;
-            padding:20px;
-            z-index:100;
+            background:#f4f6f8;
+            font-family:system-ui, sans-serif;
         }
-        .modal-wrap.show{
-            display:flex !important;
-        }
-        .modal{
-            width:100%;
-            max-width:440px;
-            background:white;
-            border-radius:10px;
-            padding:24px;
-        }
-        .modal-buttons{
-            margin-top:20px;
-            display:flex;
-            gap:12px;
-        }
-        .modal-buttons button{
-            flex:1;
-        }
-        .btn-cancel{
-            background:#888 !important;
-        }
-        .date-tip{
-            margin-top:12px;
-            padding:10px;
-            background:#eef4fc;
-            border-radius:8px;
-            text-align:center;
-            color:#2b4b80;
-            font-size:14px;
-        }
+        .box{text-align:center}
+        h2{color:#333;margin-bottom:16px}
+        p{color:#666}
     </style>
 </head>
 <body>
-    <!-- 顶部滑入提示 -->
-    <div class="toast" id="toast"></div>
-
-    <!-- 左上角返回主页 -->
-    <div class="home-back">
-        <a href="https://noachcarter5-alt.github.io">← 返回</a>
+    <div class="box">
+        <h2>正在跳转申请表单...</h2>
+        <p>3秒后自动前往腾讯问卷</p>
     </div>
-
-    <div class="container">
-        <h2>申请加入</h2>
-        <div class="form-item">
-            <label>名字</label>
-            <input type="text" id="name" placeholder="请填写名字">
-        </div>
-
-        <div class="form-item">
-            <div class="label-row">
-                <label id="contactLabel">联系邮箱</label>
-                <button type="button" class="toggle-btn" id="toggleContact">切换为手机号</button>
-            </div>
-            <input type="email" id="email" placeholder="请填写邮箱地址">
-            <input type="tel" id="phone" class="hide" placeholder="请填写手机号">
-        </div>
-
-        <button id="nextBtn">下一步</button>
-        <div class="tip">提交后，申请记录将会保存到仓库Issue，等待审核</div>
-    </div>
-
-    <!-- 弹窗：学校名称验证 + 预计审核日期 -->
-    <div class="modal-wrap" id="modal">
-        <div class="modal">
-            <h3>验证填写</h3>
-            <div class="form-item" style="margin-top:16px;">
-                <label>学校名称</label>
-                <input type="text" id="schoolName" placeholder="填写学校名称">
-            </div>
-            <div class="date-tip">
-                预计审核通过日期：<span id="expectDate"></span>
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-cancel" id="cancelBtn">取消</button>
-                <button id="confirmBtn">确认，提交申请</button>
-            </div>
-        </div>
-    </div>
-
 <script>
-    const USERNAME = "noachcarter5-alt";
-    const REPO = "noachcarter5-alt.github.io";
-    const MAIN_PAGE = "https://noachcarter5-alt.github.io";
-
-    // 顶部滑入提示函数
-    function showToast(msg){
-        const toast = document.getElementById("toast");
-        toast.innerText = msg;
-        toast.classList.add("show");
-        setTimeout(()=>{
-            toast.classList.remove("show");
-        },2000);
-    }
-
-    // 联系方式切换
-    let contactType = "email";
-    const toggleBtn = document.getElementById("toggleContact");
-    const contactLabel = document.getElementById("contactLabel");
-    const emailInput = document.getElementById("email");
-    const phoneInput = document.getElementById("phone");
-
-    toggleBtn.onclick = function(){
-        if(contactType === "email"){
-            contactType = "phone";
-            contactLabel.innerText = "联系手机号";
-            toggleBtn.innerText = "切换为邮箱";
-            emailInput.classList.add("hide");
-            phoneInput.classList.remove("hide");
-        }else{
-            contactType = "email";
-            contactLabel.innerText = "联系邮箱";
-            toggleBtn.innerText = "切换为手机号";
-            phoneInput.classList.add("hide");
-            emailInput.classList.remove("hide");
-        }
-    }
-
-    // 自动算出两天后的日期
-    function getTwoDaysLater(){
-        let d = new Date();
-        d.setDate(d.getDate() + 2);
-        let y = d.getFullYear();
-        let m = String(d.getMonth()+1).padStart(2,'0');
-        let day = String(d.getDate()).padStart(2,'0');
-        return `${y}-${m}-${day}`;
-    }
-    const expectDay = getTwoDaysLater();
-    document.getElementById("expectDate").innerText = expectDay;
-
-    const nextBtn = document.getElementById("nextBtn");
-    const modal = document.getElementById("modal");
-    const cancelBtn = document.getElementById("cancelBtn");
-    const confirmBtn = document.getElementById("confirmBtn");
-
-    nextBtn.onclick = function(){
-        const nameVal = document.getElementById("name").value.trim();
-        if(!nameVal){
-            showToast("名字不能是空白");
-            return;
-        }
-        // 校验当前联系方式
-        if(contactType === "email"){
-            const emailVal = emailInput.value.trim();
-            if(!emailVal){
-                showToast("请填写邮箱地址");
-                return;
-            }
-        }else{
-            const phoneVal = phoneInput.value.trim();
-            if(!phoneVal){
-                showToast("请填写手机号");
-                return;
-            }
-        }
-        modal.classList.add("show");
-    }
-
-    cancelBtn.onclick = function(){
-        modal.classList.remove("show");
-    }
-
-    confirmBtn.onclick = function(){
-        const schoolVal = document.getElementById("schoolName").value.trim();
-        if(!schoolVal){
-            showToast("学校名称必须填写");
-            return;
-        }
-        const nameVal = document.getElementById("name").value.trim();
-        let contactVal = "";
-        let contactLabelText = "";
-        if(contactType === "email"){
-            contactVal = emailInput.value.trim();
-            contactLabelText = "邮箱";
-        }else{
-            contactVal = phoneInput.value.trim();
-            contactLabelText = "手机号";
-        }
-
-        const issueTitle = `新申请 - ${nameVal}`;
-        const issueBody = `名字：${nameVal}\n${contactLabelText}：${contactVal}\n学校：${schoolVal}\n预计审核日期：${expectDay}`;
-
-        const url = `https://github.com/${USERNAME}/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
-        
-        showToast("申请已提交，请注意查收通知");
-        window.open(url,"_blank");
-
-        // 1.5秒后自动返回主页
-        setTimeout(()=>{
-            window.location.href = MAIN_PAGE;
-        },1500);
-    }
+// =========这里改成你的腾讯问卷完整网址=========
+const targetUrl = "https://wj.qq.com/s2/28427600/wtr5/";
+// 3秒自动跳转
+setTimeout(function(){
+    window.location.href = targetUrl;
+},3000);
 </script>
 </body>
 </html>
