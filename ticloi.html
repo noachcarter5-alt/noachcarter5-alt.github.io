@@ -116,7 +116,7 @@
             color:#666;
             text-align:center;
         }
-        /* 弹窗样式 */
+        /* 弹窗修复：解决点下一步弹不出弹窗 */
         .modal-wrap{
             display:none;
             position:fixed;
@@ -130,15 +130,15 @@
             padding:20px;
             z-index:100;
         }
+        .modal-wrap.show{
+            display:flex !important;
+        }
         .modal{
             width:100%;
             max-width:440px;
             background:white;
             border-radius:10px;
             padding:24px;
-        }
-        .modal.show{
-            display:flex;
         }
         .modal-buttons{
             margin-top:20px;
@@ -172,7 +172,7 @@
     </div>
 
     <div class="container">
-        <h2>📋 申请加入</h2>
+        <h2>申请加入</h2>
         <div class="form-item">
             <label>名字</label>
             <input type="text" id="name" placeholder="请填写名字">
@@ -188,16 +188,16 @@
         </div>
 
         <button id="nextBtn">下一步</button>
-        <div class="tip">提交后，申请记录将会保存shenhrhoushanfhu，等待审核</div>
+        <div class="tip">提交后，申请记录将会保存到仓库Issue，等待审核</div>
     </div>
 
-    <!-- 弹窗：中学名称验证 + 预计审核日期 -->
+    <!-- 弹窗：学校名称验证 + 预计审核日期 -->
     <div class="modal-wrap" id="modal">
         <div class="modal">
             <h3>验证填写</h3>
             <div class="form-item" style="margin-top:16px;">
-                <label>就读学校名称</label>
-                <input type="text" id="schoolName" placeholder="填写中学名称">
+                <label>学校名称</label>
+                <input type="text" id="schoolName" placeholder="填写学校名称">
             </div>
             <div class="date-tip">
                 预计审核通过日期：<span id="expectDate"></span>
@@ -309,7 +309,7 @@
         }
 
         const issueTitle = `新申请 - ${nameVal}`;
-        const issueBody = `名字：${nameVal}\n${contactLabelText}：${contactVal}\n中学：${schoolVal}\n预计审核日期：${expectDay}`;
+        const issueBody = `名字：${nameVal}\n${contactLabelText}：${contactVal}\n学校：${schoolVal}\n预计审核日期：${expectDay}`;
 
         const url = `https://github.com/${USERNAME}/${REPO}/issues/new?title=${encodeURIComponent(issueTitle)}&body=${encodeURIComponent(issueBody)}`;
         
