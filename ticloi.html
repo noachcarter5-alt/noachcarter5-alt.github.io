@@ -16,21 +16,29 @@
         }
         .box{text-align:center}
         h2{color:#333;margin-bottom:16px}
-        p{color:#666}
+        p{color:#666;font-size:18px}
+        .num{font-size:48px;color:#2b6cb0;font-weight:bold;display:inline-block;width:60px}
     </style>
 </head>
 <body>
     <div class="box">
         <h2>正在跳转申请表单...</h2>
-        <p>3秒后自动前往腾讯问卷</p>
+        <p><span class="num" id="count">3</span> 秒后自动前往腾讯问卷</p>
     </div>
 <script>
-// =========这里改成你的腾讯问卷完整网址=========
+// =========替换成你的腾讯问卷完整网址=========
 const targetUrl = "https://wj.qq.com/s2/28427600/wtr5/";
-// 3秒自动跳转
-setTimeout(function(){
-    window.location.href = targetUrl;
-},3000);
+let time = 3;
+const countDom = document.getElementById("count");
+
+const timer = setInterval(function(){
+    time--;
+    countDom.innerText = time;
+    if(time <= 0){
+        clearInterval(timer);
+        window.location.href = targetUrl;
+    }
+},1000);
 </script>
 </body>
 </html>
