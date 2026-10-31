@@ -19,16 +19,15 @@
         }
 
         body {
-            background-color: #F5F6F9;   /* 已修改为 F5F6F9 */
+            background-color: #F5F6F9;
         }
 
-        /* 全屏大标题图 */
         .header-banner {
             width: 100%;
-            margin: 0 0 0 0;
+            margin: 0;
             padding: 0;
             overflow: hidden;
-            background-color: #F5F6F9;   /* 顶部背景色 */
+            background-color: #F5F6F9;
         }
 
         .header-banner img {
@@ -40,7 +39,7 @@
         .nav-box {
             width: 100%;
             background: #fff;
-            border-bottom: 2px solid #1a2b48;   /* 已去掉上面的线 */
+            border-bottom: 2px solid #1a2b48;
             position: sticky;
             top: 0;
             z-index: 9999;
@@ -229,7 +228,6 @@
 
     <div class="nav-box">
         <ul class="nav-list">
-            <!-- 导航内容保持不变 -->
             <li class="nav-item">
                 <a href="index.html">首页</a>
                 <ul class="sub-menu">
@@ -270,14 +268,18 @@
                     <li><a href="#">技术文档</a></li>
                 </ul>
             </li>
+
+            <!-- 关于我们（已新增“我们是谁”） -->
             <li class="nav-item mobile-toggle">
                 <a href="javascript:void(0)">关于我们</a>
                 <ul class="sub-menu">
-                    <li><a href="ticselve.html">团队介绍</a></li>
+                    <li><a href="#">团队介绍</a></li>           <!-- 链接已清空 -->
+                    <li><a href="ticwho.html">我们是谁</a></li>   <!-- 新增 -->
                     <li><a href="ticloi.html">加入我们</a></li>
                     <li><a href="contact.html">联系方式</a></li>
                 </ul>
             </li>
+
             <li class="nav-item">
                 <a href="https://github.com">外部链接</a>
                 <ul class="sub-menu">
