@@ -43,9 +43,12 @@
             right:16px;
             background:#fff;
             border-radius:8px;
-            box-shadow:0 2px 10px #00000022;
+            box-shadow:0 2px 10px rgba(0,0,0,0.22);
             display:none;
             min-width:140px;
+        }
+        .drop-menu.show{
+            display:block;
         }
         .drop-menu a{
             display:block;
@@ -56,50 +59,45 @@
         .drop-menu a:hover{
             background:#f0f2f5;
         }
-        .show{
-            display:block;
-        }
         .container{
-            max-width:720px;
+            max-width:700px;
             margin:0 auto;
         }
-        .welcome-box{
-            background:#2b5bcc;
-            color:#fff;
-            border-radius:12px;
-            padding:28px 20px;
-            margin-bottom:20px;
-        }
-        .welcome-box h1{
-            font-size:24px;
-            margin-bottom:8px;
-        }
-        .card{
-            background:#fff;
-            border-radius:12px;
-            padding:22px;
+        .card-img-wrap{
+            text-align:center;
             margin-bottom:16px;
         }
-        .card h3{
-            margin-bottom:10px;
-            font-size:18px;
+        .level-card{
+            max-width:100%;
+            width:340px;
+            border-radius:10px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.12);
         }
-        .card p{
-            color:#555;
-            line-height:1.7;
-        }
-        .card ul{
-            padding-left:20px;
-            margin-top:8px;
-            color:#444;
-            line-height:1.7;
-        }
-        .level-info{
+        .level-text{
             text-align:center;
-            font-size:17px;
-            padding:16px;
-            color:#2b5bcc;
+            font-size:18px;
             font-weight:bold;
+            color:#2b5bcc;
+            margin-bottom:24px;
+        }
+        .info-block{
+            background:#fff;
+            border-radius:10px;
+            padding:20px;
+            margin-bottom:16px;
+        }
+        .info-block h3{
+            margin-bottom:10px;
+            color:#1a2b48;
+        }
+        .logout-btn{
+            width:100%;
+            padding:14px;
+            background:#d9232e;
+            color:#fff;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
         }
     </style>
 </head>
@@ -108,84 +106,81 @@
         <button class="menu-btn" id="menuBtn">☰</button>
         <div class="drop-menu" id="dropMenu">
             <a href="index.html">返回主页</a>
-            <a href="javascript:logout()">退出登录</a>
+            <a href="#" id="logoutItem">退出登录</a>
         </div>
     </div>
 
     <div class="container">
-        <div class="welcome-box">
-            <h1>欢迎加入 TIC</h1>
-            <p>你已成功登录员工工作台，请认真阅读员工手册相关规定，遵守各项管理要求。</p>
+        <div class="card-img-wrap">
+            <img class="level-card" id="levelCardImg" alt="等级卡片">
+        </div>
+        <div class="level-text" id="levelText"></div>
+
+        <div class="info-block">
+            <h3>权限说明</h3>
+            <p>当前档位对应权限以站点规范文档为准。</p>
         </div>
 
-        <div class="card">
-            <h3>基本准则</h3>
-            <p>所有TIC成员，应当秉持严谨、客观的态度完成各项工作，如实记录全部操作内容，不得擅自篡改数据、瞒报异常情况。工作交流保持文明，禁止私下传播内部资料。</p>
-        </div>
-
-        <div class="card">
-            <h3>岗位与等级</h3>
-            <p>TIC一共设置4个档位，每个档位包含多个可选岗位，档位凭证代表对应权限，权限不足时不可越级审批、核查。</p>
-            <ul>
-                <li>L1 基础：实习、见习岗位，仅可辅助作业</li>
-                <li>L2 监察：独立完成常规标准化任务</li>
-                <li>L3 督导：督查、指导下级人员工作</li>
-                <li>L4 主管：复核结果、审批报告，统筹项目</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>工作要求</h3>
-            <ul>
-                <li>开展工作前确认自身档位权限，不越权操作</li>
-                <li>遇到无法处理的问题，及时向上一级负责人报备</li>
-                <li>保管好个人账号，账号不可转借其他人使用</li>
-                <li>离职或者退出时，交还相关凭证，账号停用</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>联系渠道</h3>
-            <p>如有疑问，可以<a href="contact.html">联系我们</a>，联系负责人咨询相关问题。</p>
-        </div>
-        <div class="level-info" id="levelText"></div>
+        <button class="logout-btn" id="logoutBtn">退出登录</button>
     </div>
 
 <script>
-    const menuBtn = document.getElementById('menuBtn');
-    const dropMenu = document.getElementById('dropMenu');
-    menuBtn.onclick = function(){
-        dropMenu.classList.toggle('show');
-    }
-    document.addEventListener('click',function(e){
-        if(!menuBtn.contains(e.target) && !dropMenu.contains(e.target)){
-            dropMenu.classList.remove('show');
-        }
-    })
-
-    function logout(){
-        sessionStorage.removeItem("userLevel");
-        sessionStorage.removeItem("userAccount");
+// 延时读取，防止刚跳转读取不到，避免闪回
+setTimeout(function(){
+    const lv = sessionStorage.getItem("userLevel");
+    const acc = sessionStorage.getItem("userAccount");
+    if(!lv){
         location.href = "wklogin.html";
+        return;
     }
+    // 调换完成：L2=IMG_3064.jpeg，L3=IMG_3063.jpeg
+    let imgSrc = "";
+    let textStr = "";
+    switch(lv){
+        case "L1":
+            imgSrc = "IMG_3062.jpeg";
+            textStr = `账号：${acc}｜等级：L1 基础档位`;
+            break;
+        case "L2":
+            imgSrc = "IMG_3064.jpeg";
+            textStr = `账号：${acc}｜等级：L2 监察档位`;
+            break;
+        case "L3":
+            imgSrc = "IMG_3063.jpeg";
+            textStr = `账号：${acc}｜等级：L3 督导档位`;
+            break;
+        case "L4":
+            imgSrc = "IMG_3065.jpeg";
+            textStr = `账号：${acc}｜等级：L4 主管档位`;
+            break;
+    }
+    document.getElementById("levelCardImg").src = imgSrc;
+    document.getElementById("levelText").innerText = textStr;
+},150);
 
-    // 增加延时，解决页面加载太快读取session为空闪回登录页
-    setTimeout(()=>{
-        const userLv = sessionStorage.getItem("userLevel");
-        const userAcc = sessionStorage.getItem("userAccount");
-        const levelTextDom = document.getElementById("levelText");
-        let levelName = "";
-        if(userLv === "L1") levelName = "基础LS";
-        if(userLv === "L2") levelName = "监察LT TD";
-        if(userLv === "L3") levelName = "督导LT SE";
-        if(userLv === "L4") levelName = "主管LF BE";
+//右上角菜单
+const menuBtn = document.getElementById("menuBtn");
+const dropMenu = document.getElementById("dropMenu");
+menuBtn.onclick = function(){
+    dropMenu.classList.toggle("show");
+}
+document.addEventListener("click",function(e){
+    if(!menuBtn.contains(e.target) && !dropMenu.contains(e.target)){
+        dropMenu.classList.remove("show");
+    }
+})
 
-        if(!userLv){
-            location.href = "wklogin.html";
-        }else{
-            levelTextDom.innerText = `您的档位为：${userLv}（${levelName}），账号：${userAcc}`;
-        }
-    },150);
+//退出登录
+function doLogout(){
+    sessionStorage.removeItem("userLevel");
+    sessionStorage.removeItem("userAccount");
+    location.href="index.html";
+}
+document.getElementById("logoutBtn").onclick = doLogout;
+document.getElementById("logoutItem").onclick = function(e){
+    e.preventDefault();
+    doLogout();
+}
 </script>
 </body>
 </html>
