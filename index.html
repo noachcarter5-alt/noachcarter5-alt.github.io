@@ -22,23 +22,20 @@
             background-color: #f5f7fa;
         }
 
-        /* 新增：顶部大标题图 */
+        /* 全屏大标题图 */
         .header-banner {
             width: 100%;
-            max-width: 1200px;
-            margin: 20px auto 10px;
-            padding: 0 20px;
-            text-align: center;
+            margin: 0 0 20px 0;
+            padding: 0;
+            overflow: hidden;
         }
 
         .header-banner img {
             width: 100%;
-            max-width: 1100px;
             height: auto;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             display: block;
-            margin: 0 auto;
+            border-radius: 0;
+            box-shadow: none;
         }
 
         .nav-box {
@@ -227,14 +224,14 @@
 </head>
 <body>
 
-    <!-- 大标题图片放在导航栏上方 -->
+    <!-- 全屏大标题图（已铺满） -->
     <div class="header-banner">
         <img src="IMG_5715.jpeg" alt="TIC INVESTIGATION">
     </div>
 
     <div class="nav-box">
+        <!-- 导航栏保持不变 -->
         <ul class="nav-list">
-            <!-- 导航内容保持不变 -->
             <li class="nav-item">
                 <a href="index.html">首页</a>
                 <ul class="sub-menu">
