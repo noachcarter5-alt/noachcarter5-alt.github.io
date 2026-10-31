@@ -97,6 +97,13 @@
             color:#444;
             line-height:1.7;
         }
+        .level-info{
+            text-align:center;
+            font-size:17px;
+            padding:16px;
+            color:#2b5bcc;
+            font-weight:bold;
+        }
     </style>
 </head>
 <body>
@@ -105,7 +112,7 @@
         <button class="menu-btn" id="menuBtn">☰</button>
         <div class="drop-menu" id="dropMenu">
             <a href="index.html">返回主页</a>
-            <a href="login.html">退出登录</a>
+            <a href="javascript:logout()">退出登录</a>
         </div>
     </div>
 
@@ -145,6 +152,8 @@
             <h3>联系渠道</h3>
             <p>如有疑问，可以<a href="contact.html">联系我们</a>，联系负责人咨询相关问题。</p>
         </div>
+        <!-- 新增：底部等级显示 -->
+        <div class="level-info" id="levelText"></div>
     </div>
 
 <script>
@@ -159,6 +168,29 @@
             dropMenu.classList.remove('show');
         }
     })
+
+    //退出登录，清空本地存储
+    function logout(){
+        localStorage.removeItem("userLevel");
+        localStorage.removeItem("userAccount");
+        location.href = "login.html";
+    }
+
+    //读取登录保存的等级信息展示
+    const userLv = localStorage.getItem("userLevel");
+    const userAcc = localStorage.getItem("userAccount");
+    const levelTextDom = document.getElementById("levelText");
+    let levelName = "";
+    if(userLv === "L1") levelName = "基础";
+    if(userLv === "L2") levelName = "侦查";
+    if(userLv === "L3") levelName = "督导";
+    if(userLv === "L4") levelName = "主管";
+
+    if(userLv){
+        levelTextDom.innerText = `您的等级为：${userLv}（${levelName}），账号：${userAcc}`;
+    }else{
+        levelTextDom.innerText = "尚未登录，请前往登录页面";
+    }
 </script>
 </body>
 </html>
