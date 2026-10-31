@@ -357,35 +357,36 @@
         </div>
     </div>
 
-    <script>
-        const toggleItems = document.querySelectorAll('.mobile-toggle > a');
-        toggleItems.forEach(item => {
-            item.onclick = function (e) {
-                e.preventDefault();
-                const submenu = this.nextElementSibling;
-                document.querySelectorAll('.sub-menu.active').forEach(sm => {
-                    if (sm !== submenu) sm.classList.remove('active');
-                })
-                submenu.classList.toggle('active');
-            }
-        })
+<script>
+    const toggleItems = document.querySelectorAll('.mobile-toggle > a');
+    toggleItems.forEach(item => {
+        item.onclick = function (e) {
+            e.preventDefault();
+            const submenu = this.nextElementSibling;
+            document.querySelectorAll('.sub-menu.active').forEach(sm => {
+                if (sm !== submenu) sm.classList.remove('active');
+            })
+            submenu.classList.toggle('active');
+        }
+    })
 
-        document.addEventListener('click', function (e) {
-            if (!e.target.closest('.mobile-toggle')) {
-                document.querySelectorAll('.sub-menu.active').forEach(sm => sm.classList.remove('active'));
-            }
-        })
-    <script>
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.mobile-toggle')) {
+            document.querySelectorAll('.sub-menu.active').forEach(sm => sm.classList.remove('active'));
+        }
+    })
+</script>
+
+<script>
 function goCheckLogin(){
     const lv = sessionStorage.getItem("userLevel");
     if(lv){
-        //已经登录 → 直接进工作台 ticwk.html
         location.href = "ticwk.html";
     }else{
-        //没有登录 → 跳 wklogin.html（你的登录页，WK命名）
         location.href = "wklogin.html";
     }
 }
 </script>
+
 </body>
 </html>
