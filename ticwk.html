@@ -63,23 +63,25 @@
             max-width:700px;
             margin:0 auto;
         }
-        .card-img-wrap{
-            text-align:center;
-            margin-bottom:16px;
-        }
-        .level-card{
-            max-width:100%;
-            width:340px;
-            border-radius:10px;
-            box-shadow:0 3px 12px rgba(0,0,0,0.12);
-        }
         .level-text{
             text-align:center;
             font-size:18px;
             font-weight:bold;
             color:#2b5bcc;
+            margin-bottom:12px;
+        }
+        /* ========== 新增图片样式 ========== */
+        .card-img-wrap{
+            text-align:center;
             margin-bottom:24px;
         }
+        .level-card{
+            max-width:90%;
+            width:330px;
+            border-radius:10px;
+            box-shadow:0 3px 12px rgba(0,0,0,0.12);
+        }
+        /* ================================== */
         .info-block{
             background:#fff;
             border-radius:10px;
@@ -111,10 +113,12 @@
     </div>
 
     <div class="container">
+        <div class="level-text" id="levelText"></div>
+        <!-- ========== 新增等级卡片图片，放在等级文字后边 ========== -->
         <div class="card-img-wrap">
             <img class="level-card" id="levelCardImg" alt="等级卡片">
         </div>
-        <div class="level-text" id="levelText"></div>
+        <!-- ====================================================== -->
 
         <div class="info-block">
             <h3>权限说明</h3>
@@ -125,7 +129,6 @@
     </div>
 
 <script>
-// 延时读取，防止刚跳转读取不到，避免闪回
 setTimeout(function(){
     const lv = sessionStorage.getItem("userLevel");
     const acc = sessionStorage.getItem("userAccount");
@@ -133,7 +136,6 @@ setTimeout(function(){
         location.href = "wklogin.html";
         return;
     }
-    // 调换完成：L2=IMG_3064.jpeg，L3=IMG_3063.jpeg
     let imgSrc = "";
     let textStr = "";
     switch(lv){
@@ -154,11 +156,11 @@ setTimeout(function(){
             textStr = `账号：${acc}｜等级：L4 主管档位`;
             break;
     }
-    document.getElementById("levelCardImg").src = imgSrc;
     document.getElementById("levelText").innerText = textStr;
+    // 设置等级卡片图片
+    document.getElementById("levelCardImg").src = imgSrc;
 },150);
 
-//右上角菜单
 const menuBtn = document.getElementById("menuBtn");
 const dropMenu = document.getElementById("dropMenu");
 menuBtn.onclick = function(){
@@ -170,7 +172,6 @@ document.addEventListener("click",function(e){
     }
 })
 
-//退出登录
 function doLogout(){
     sessionStorage.removeItem("userLevel");
     sessionStorage.removeItem("userAccount");
