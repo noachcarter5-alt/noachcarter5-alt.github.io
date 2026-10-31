@@ -18,7 +18,6 @@
             padding-right:16px;
             padding-bottom:30px;
         }
-        /* 顶部导航栏 */
         .top-bar{
             position:fixed;
             top:0;
@@ -32,14 +31,12 @@
             padding-right:16px;
             z-index:99;
         }
-        /* 右上角三条杠按钮 */
         .menu-btn{
             color:#fff;
             font-size:26px;
             background:transparent;
             border:none;
         }
-        /* 下拉菜单 */
         .drop-menu{
             position:absolute;
             top:56px;
@@ -107,7 +104,6 @@
     </style>
 </head>
 <body>
-    <!-- 顶部导航栏，右上角三条杠 -->
     <div class="top-bar">
         <button class="menu-btn" id="menuBtn">☰</button>
         <div class="drop-menu" id="dropMenu">
@@ -129,10 +125,10 @@
 
         <div class="card">
             <h3>岗位与等级</h3>
-            <p>TIC一共设置4个等级档位，每个档位包含多个可选岗位，等级凭证代表对应权限，权限不足时不可越级审批、核查。</p>
+            <p>TIC一共设置4个档位，每个档位包含多个可选岗位，档位凭证代表对应权限，权限不足时不可越级审批、核查。</p>
             <ul>
                 <li>L1 基础：实习、见习岗位，仅可辅助作业</li>
-                <li>L2 侦察：独立完成常规标准化任务</li>
+                <li>L2 监察：独立完成常规标准化任务</li>
                 <li>L3 督导：督查、指导下级人员工作</li>
                 <li>L4 主管：复核结果、审批报告，统筹项目</li>
             </ul>
@@ -141,7 +137,7 @@
         <div class="card">
             <h3>工作要求</h3>
             <ul>
-                <li>开展工作前确认自身等级权限，不越权操作</li>
+                <li>开展工作前确认自身档位权限，不越权操作</li>
                 <li>遇到无法处理的问题，及时向上一级负责人报备</li>
                 <li>保管好个人账号，账号不可转借其他人使用</li>
                 <li>离职或者退出时，交还相关凭证，账号停用</li>
@@ -152,7 +148,6 @@
             <h3>联系渠道</h3>
             <p>如有疑问，可以<a href="contact.html">联系我们</a>，联系负责人咨询相关问题。</p>
         </div>
-        <!-- 新增：底部等级显示 -->
         <div class="level-info" id="levelText"></div>
     </div>
 
@@ -162,34 +157,31 @@
     menuBtn.onclick = function(){
         dropMenu.classList.toggle('show');
     }
-    //点击页面空白关闭下拉菜单
     document.addEventListener('click',function(e){
         if(!menuBtn.contains(e.target) && !dropMenu.contains(e.target)){
             dropMenu.classList.remove('show');
         }
     })
 
-    //退出登录，清空本地存储
     function logout(){
-        localStorage.removeItem("userLevel");
-        localStorage.removeItem("userAccount");
+        sessionStorage.removeItem("userLevel");
+        sessionStorage.removeItem("userAccount");
         location.href = "login.html";
     }
 
-    //读取登录保存的等级信息展示
-    const userLv = localStorage.getItem("userLevel");
-    const userAcc = localStorage.getItem("userAccount");
+    const userLv = sessionStorage.getItem("userLevel");
+    const userAcc = sessionStorage.getItem("userAccount");
     const levelTextDom = document.getElementById("levelText");
     let levelName = "";
-    if(userLv === "L1") levelName = "基础L1";
-    if(userLv === "L2") levelName = "侦查L2";
-    if(userLv === "L3") levelName = "督导L3";
-    if(userLv === "L4") levelName = "主管L4 BE";
+    if(userLv === "L1") levelName = "基础";
+    if(userLv === "L2") levelName = "监察";
+    if(userLv === "L3") levelName = "督导";
+    if(userLv === "L4") levelName = "主管";
 
-    if(userLv){
-        levelTextDom.innerText = `您的等级为：${userLv}（${levelName}），账号：${userAcc}`;
+    if(!userLv){
+        location.href = "login.html";
     }else{
-        levelTextDom.innerText = "尚未登录，请前往登录页面";
+        levelTextDom.innerText = `您的档位为：${userLv}（${levelName}），账号：${userAcc}`;
     }
 </script>
 </body>
