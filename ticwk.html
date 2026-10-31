@@ -131,10 +131,10 @@
             <h3>岗位与等级</h3>
             <p>TIC一共设置4个等级档位，每个档位包含多个可选岗位，等级凭证代表对应权限，权限不足时不可越级审批、核查。</p>
             <ul>
-                <li>L1 基础级：实习、见习岗位，仅可辅助作业</li>
-                <li>L2 骨干级：独立完成常规标准化任务</li>
-                <li>L3 督导级：督查、指导下级人员工作</li>
-                <li>L4 主管级：复核结果、审批报告，统筹项目</li>
+                <li>L1 基础：实习、见习岗位，仅可辅助作业</li>
+                <li>L2 侦察：独立完成常规标准化任务</li>
+                <li>L3 督导：督查、指导下级人员工作</li>
+                <li>L4 主管：复核结果、审批报告，统筹项目</li>
             </ul>
         </div>
 
@@ -181,10 +181,10 @@
     const userAcc = localStorage.getItem("userAccount");
     const levelTextDom = document.getElementById("levelText");
     let levelName = "";
-    if(userLv === "L1") levelName = "基础";
-    if(userLv === "L2") levelName = "侦查";
-    if(userLv === "L3") levelName = "督导";
-    if(userLv === "L4") levelName = "主管";
+    if(userLv === "L1") levelName = "基础L1";
+    if(userLv === "L2") levelName = "侦查L2";
+    if(userLv === "L3") levelName = "督导L3";
+    if(userLv === "L4") levelName = "主管L4 BE";
 
     if(userLv){
         levelTextDom.innerText = `您的等级为：${userLv}（${levelName}），账号：${userAcc}`;
