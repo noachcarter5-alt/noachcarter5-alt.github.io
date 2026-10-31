@@ -321,7 +321,7 @@
                     <li><a href="#">成立背景</a></li>
                     <li><a href="#">核心宗旨</a></li>
                     <li><a href="#">发展历程</a></li>
-                    <li><a href="wklogin.html">员工登录</a></li>
+                    <li><a href="javascript:goCheckLogin()">员工登录</a></li>
                 </ul>
             </div>
             <div class="footer-col">
@@ -375,6 +375,17 @@
                 document.querySelectorAll('.sub-menu.active').forEach(sm => sm.classList.remove('active'));
             }
         })
-    </script>
+    <script>
+function goCheckLogin(){
+    const lv = sessionStorage.getItem("userLevel");
+    if(lv){
+        //已经登录 → 直接进工作台 ticwk.html
+        location.href = "ticwk.html";
+    }else{
+        //没有登录 → 跳 wklogin.html（你的登录页，WK命名）
+        location.href = "wklogin.html";
+    }
+}
+</script>
 </body>
 </html>
