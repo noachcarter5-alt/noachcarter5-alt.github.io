@@ -13,25 +13,40 @@
             list-style: none;
             text-decoration: none;
         }
+
         body {
             background-color: #f5f7fa;
             color: #333;
         }
 
-        /* ========== 右上角纯Logo，无点击跳转 ========== */
-        .top-right-logo{
+        /* 底层横向平铺背景：保持图标原比例，只横向重复，不拉伸 */
+        .full-bg {
             position: fixed;
-            top:20px;
-            right:20px;
-            z-index:10000;
-            width:56px;
-        }
-        .top-right-logo img{
-            width:100%;
-            border-radius:8px;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -9999;
+            background-image: url("IMG_5715.jpeg");
+            background-repeat: repeat-x;
+            background-size: auto 100%;
+            background-position: left center;
+            overflow: hidden;
         }
 
-        /* 顶部Logo标题 */
+        .top-right-logo {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            width: 56px;
+        }
+
+        .top-right-logo img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
         .top-logo {
             text-align: center;
             padding: 28px 0;
@@ -43,7 +58,6 @@
             border-bottom: 1px solid #e6e9ef;
         }
 
-        /* 导航栏 */
         .nav-box {
             width: 100%;
             background: #fff;
@@ -53,6 +67,7 @@
             top: 0;
             z-index: 9999;
         }
+
         .nav-list {
             max-width: 1200px;
             margin: 0 auto;
@@ -60,9 +75,11 @@
             justify-content: center;
             flex-wrap: wrap;
         }
+
         .nav-item {
             position: relative;
         }
+
         .nav-item > a {
             display: block;
             padding: 14px 24px;
@@ -70,10 +87,11 @@
             color: #222;
             transition: color 0.2s;
         }
+
         .nav-item > a:hover {
             color: #d9232e;
         }
-        /* 下拉子菜单 */
+
         .sub-menu {
             position: absolute;
             top: 100%;
@@ -82,10 +100,11 @@
             background: #fff;
             border: 1px solid #e6e9ef;
             border-top: 2px solid #d9232e;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             display: none;
             z-index: 9999;
         }
+
         .sub-menu li a {
             display: block;
             padding: 10px 18px;
@@ -94,77 +113,84 @@
             border-bottom: 1px solid #f0f2f5;
             transition: all 0.2s;
         }
+
         .sub-menu li a:hover {
             color: #d9232e;
             background: #fafbfc;
             padding-left: 22px;
         }
-        /* PC悬浮展开 */
-        @media(min-width:769px){
-            .nav-item:hover .sub-menu{
-                display:block;
-            }
-        }
-        /* 手机端JS控制：点击展开，主菜单不跳转 */
-        @media(max-width:768px){
-            .sub-menu.active{
-                display:block;
+
+        @media(min-width: 769px) {
+            .nav-item:hover .sub-menu {
+                display: block;
             }
         }
 
-        /* 资讯区域 */
+        @media(max-width: 768px) {
+            .sub-menu.active {
+                display: block;
+            }
+        }
+
         .news-section {
             max-width: 1200px;
             margin: 40px auto;
-            padding:0 20px;
-        }
-        .section-title{
-            font-size:22px;
-            color:#1a2b48;
-            padding-bottom:10px;
-            border-bottom:3px solid #d9232e;
-            margin-bottom:24px;
-        }
-        .news-container{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
-            gap:20px;
-        }
-        .news-card{
-            background:#fff;
-            border-radius:6px;
-            padding:20px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.06);
-            transition:transform 0.2s;
-        }
-        .news-card:hover{
-            transform: translateY(-4px);
-        }
-        .news-date{
-            font-size:12px;
-            color:#999;
-            margin-bottom:8px;
-        }
-        .news-title{
-            font-size:16px;
-            font-weight:bold;
-            color:#222;
-            margin-bottom:10px;
-            line-height:1.4;
-        }
-        .news-desc{
-            font-size:13px;
-            color:#666;
-            line-height:1.6;
+            padding: 0 20px;
         }
 
-        /* 页脚 两竖列布局 */
+        .section-title {
+            font-size: 22px;
+            color: #1a2b48;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #d9232e;
+            margin-bottom: 24px;
+        }
+
+        .news-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .news-card {
+            background: #fff;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .news-date {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .news-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #222;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .news-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
         .footer {
             background: #1a2b48;
             color: #c8d0e0;
             margin-top: 50px;
             padding-top: 35px;
         }
+
         .footer-inner {
             max-width: 1200px;
             margin: 0 auto;
@@ -175,22 +201,27 @@
             padding-bottom: 30px;
             border-bottom: 1px solid #2e3f5e;
         }
+
         .footer-col h4 {
             color: #fff;
             font-size: 15px;
             margin-bottom: 15px;
         }
+
         .footer-col li {
             margin-bottom: 8px;
         }
+
         .footer-col li a {
             color: #c8d0e0;
             font-size: 13px;
             transition: color 0.2s;
         }
+
         .footer-col li a:hover {
             color: #fff;
         }
+
         .footer-copyright {
             text-align: center;
             padding: 18px 0;
@@ -198,17 +229,18 @@
             font-size: 12px;
         }
 
-        /* 移动端适配 */
         @media (max-width: 768px) {
             .top-logo {
                 font-size: 26px;
                 letter-spacing: 3px;
                 padding: 20px 0;
             }
+
             .nav-item > a {
                 padding: 12px 16px;
                 font-size: 14px;
             }
+
             .footer-inner {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -217,7 +249,8 @@
     </style>
 </head>
 <body>
-    <!-- 右上角纯Logo，无链接，图片IMG_5715.jpeg -->
+    <div class="full-bg"></div>
+
     <div class="top-right-logo">
         <img src="IMG_5715.jpeg" alt="TIC标识">
     </div>
@@ -284,7 +317,6 @@
         </ul>
     </div>
 
-    <!-- 资讯板块，包含TIC网页大更新公告 -->
     <div class="news-section">
         <h2 class="section-title">最新资讯</h2>
         <div class="news-container">
@@ -306,7 +338,6 @@
         </div>
     </div>
 
-    <!-- 两列页脚 -->
     <div class="footer">
         <div class="footer-inner">
             <div class="footer-col">
@@ -351,24 +382,22 @@
         </div>
     </div>
 
-    <!-- JS：手机端点击展开下拉，主菜单不会跳转 -->
     <script>
         const toggleItems = document.querySelectorAll('.mobile-toggle > a');
-        toggleItems.forEach(item=>{
-            item.onclick = function(e){
+        toggleItems.forEach(item => {
+            item.onclick = function (e) {
                 e.preventDefault();
                 const submenu = this.nextElementSibling;
-                // 关闭其他已经打开的下拉
-                document.querySelectorAll('.sub-menu.active').forEach(sm=>{
-                    if(sm!==submenu) sm.classList.remove('active');
+                document.querySelectorAll('.sub-menu.active').forEach(sm => {
+                    if (sm !== submenu) sm.classList.remove('active');
                 })
                 submenu.classList.toggle('active');
             }
         })
-        // 点击页面空白，收起下拉菜单
-        document.addEventListener('click',function(e){
-            if(!e.target.closest('.mobile-toggle')){
-                document.querySelectorAll('.sub-menu.active').forEach(sm=>sm.classList.remove('active'));
+
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.mobile-toggle')) {
+                document.querySelectorAll('.sub-menu.active').forEach(sm => sm.classList.remove('active'));
             }
         })
     </script>
