@@ -104,15 +104,25 @@ const userList = [
     {acc:"T263642", pwd:"402899676767", level:"L4"}
 ];
 
+// 新增：已经登录，打开登录页直接跳工作台
+(function(){
+    const lv = sessionStorage.getItem("userLevel");
+    if(lv){
+        location.href = "TicWK.html";
+    }
+})();
+
 function loginCheck(){
     let acc = document.getElementById("userAcc").value.trim();
     let pwd = document.getElementById("userPwd").value.trim();
     const tipDom = document.getElementById("errTip");
     const findUser = userList.find(item=> item.acc === acc && item.pwd === pwd);
     if(findUser){
-        localStorage.setItem("userLevel", findUser.level);
-        localStorage.setItem("userAccount", findUser.acc);
-        location.href = "ticwk.html";
+        // ✅ 统一改成 sessionStorage 和工作台匹配
+        sessionStorage.setItem("userLevel", findUser.level);
+        sessionStorage.setItem("userAccount", findUser.acc);
+        // ⚠️ 和仓库工作台文件名大小写完全一致 TicWK.html
+        location.href = "TicWK.html";
     }else{
         tipDom.style.display="block";
     }
