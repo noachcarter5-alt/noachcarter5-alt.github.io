@@ -169,20 +169,23 @@
         location.href = "wklogin.html";
     }
 
-    const userLv = sessionStorage.getItem("userLevel");
-    const userAcc = sessionStorage.getItem("userAccount");
-    const levelTextDom = document.getElementById("levelText");
-    let levelName = "";
-    if(userLv === "L1") levelName = "基础LS";
-    if(userLv === "L2") levelName = "监察LT TD";
-    if(userLv === "L3") levelName = "督导LT SE";
-    if(userLv === "L4") levelName = "主管LF BE";
+    // 增加延时，解决页面加载太快读取session为空闪回登录页
+    setTimeout(()=>{
+        const userLv = sessionStorage.getItem("userLevel");
+        const userAcc = sessionStorage.getItem("userAccount");
+        const levelTextDom = document.getElementById("levelText");
+        let levelName = "";
+        if(userLv === "L1") levelName = "基础LS";
+        if(userLv === "L2") levelName = "监察LT TD";
+        if(userLv === "L3") levelName = "督导LT SE";
+        if(userLv === "L4") levelName = "主管LF BE";
 
-    if(!userLv){
-        location.href = "wklogin.html";
-    }else{
-        levelTextDom.innerText = `您的档位为：${userLv}（${levelName}），账号：${userAcc}`;
-    }
+        if(!userLv){
+            location.href = "wklogin.html";
+        }else{
+            levelTextDom.innerText = `您的档位为：${userLv}（${levelName}），账号：${userAcc}`;
+        }
+    },150);
 </script>
 </body>
 </html>
