@@ -20,7 +20,6 @@
             padding:15px;
             position:relative;
         }
-        /* 左上角返回主页按钮 */
         .back-home{
             position:absolute;
             top:16px;
@@ -91,9 +90,7 @@
         <button onclick="loginCheck()">登录</button>
         <div class="tip" id="errTip">用户名或者密码错误</div>
     </div>
-
 <script>
-//用户名、复杂密码，L1-L4齐全
 const userList = [
     {acc:"T729481", pwd:"Ks92pQ7z", level:"L1"},
     {acc:"T285037", pwd:"Mw47sA2k", level:"L2"},
@@ -104,11 +101,10 @@ const userList = [
     {acc:"T263642", pwd:"402899676767", level:"L4"}
 ];
 
-// 新增：已经登录，打开登录页直接跳工作台
 (function(){
     const lv = sessionStorage.getItem("userLevel");
     if(lv){
-        location.href = "ticwk.html";
+        location.href = "index.html";
     }
 })();
 
@@ -118,11 +114,18 @@ function loginCheck(){
     const tipDom = document.getElementById("errTip");
     const findUser = userList.find(item=> item.acc === acc && item.pwd === pwd);
     if(findUser){
-        // ✅ 统一改成 sessionStorage 和工作台匹配
         sessionStorage.setItem("userLevel", findUser.level);
         sessionStorage.setItem("userAccount", findUser.acc);
-        // ⚠️ 和仓库工作台文件名大小写完全一致 wk.html
-        location.href = "ticwk.html";
+
+        //读取：之前被拦截时保存的要跳转的页面
+        let redirectPage = sessionStorage.getItem("redirectTo");
+        sessionStorage.removeItem("redirectTo"); //用完删掉
+
+        if(redirectPage){
+            location.href = redirectPage;
+        }else{
+            location.href = "index.html";
+        }
     }else{
         tipDom.style.display="block";
     }
