@@ -119,14 +119,15 @@
 <body>
     <!-- ========== 登录校验JS，页面最先执行 ========== -->
     <script>
-        // 没有档位信息，直接跳登录页 wklogin.html
-        setTimeout(()=>{
-            const userLv = sessionStorage.getItem("userLevel");
-            if(!userLv){
-                location.href = "wklogin.html";
-            }
-        },80);
-    </script>
+setTimeout(()=>{
+    const userLv = sessionStorage.getItem("userLevel");
+    if(!userLv){
+        //记住：我本来想去 ticte.html
+        sessionStorage.setItem("redirectTo","ticte.html");
+        location.href = "wklogin.html";
+    }
+},80);
+</script>
 
     <div class="nav-bar">
         <a href="ticwk.html">TIC员工工作台</a>
