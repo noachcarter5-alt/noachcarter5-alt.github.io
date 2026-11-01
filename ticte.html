@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIC 技术手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", system-ui, sans-serif;
+        }
+        body {
+            background-color: #f2f4f8;
+            color: #222;
+            line-height: 1.8;
+            padding: 20px;
+        }
+        .manual-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 36px;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: #2b5bcc;
+            margin-bottom: 6px;
+            font-size: 28px;
+        }
+        .sub-title {
+            text-align: center;
+            color: #666;
+            margin-bottom: 32px;
+            border-bottom: 2px solid #2b5bcc;
+            padding-bottom:16px;
+        }
+        h2 {
+            color:#2b5bcc;
+            margin:28px 0 12px;
+            font-size:21px;
+            border-left:5px solid #2b5bcc;
+            padding-left:12px;
+        }
+        h3 {
+            margin:20px 0 8px;
+            font-size:17px;
+            color:#2c3e50;
+        }
+        p {
+            margin-bottom:10px;
+        }
+        ul,ol {
+            padding-left:24px;
+            margin-bottom:12px;
+        }
+        li {
+            margin-bottom:6px;
+        }
+        .code-block{
+            background:#1e293b;
+            color:#93c5fd;
+            padding:16px;
+            border-radius:8px;
+            overflow-x:auto;
+            margin:14px 0;
+            font-size:13px;
+        }
+        .warn{
+            background:#fff7cc;
+            padding:12px 16px;
+            border-left:4px solid #f59e0b;
+            margin:14px 0;
+        }
+        .tip{
+            background:#e8f0fe;
+            padding:12px 16px;
+            border-left:4px solid #2b5bcc;
+            margin:14px 0;
+        }
+        table{
+            width:100%;
+            border-collapse: collapse;
+            margin:16px 0;
+        }
+        th,td{
+            border:1px solid #d8dee8;
+            padding:10px;
+        }
+        th{
+            background:#2b5bcc;
+            color:white;
+        }
+        .footer-note{
+            margin-top:40px;
+            padding-top:20px;
+            border-top:1px solid #ddd;
+            color:#777;
+            font-size:14px;
+        }
+        .nav-bar{
+            max-width:900px;
+            margin:0 auto 16px;
+            text-align:right;
+        }
+        .nav-bar a{
+            background:#2b5bcc;
+            color:#fff;
+            padding:8px 14px;
+            border-radius:6px;
+            text-decoration:none;
+            margin-left:8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== 登录校验JS，页面最先执行 ========== -->
+    <script>
+        // 没有档位信息，直接跳登录页 wklogin.html
+        setTimeout(()=>{
+            const userLv = sessionStorage.getItem("userLevel");
+            if(!userLv){
+                location.href = "wklogin.html";
+            }
+        },80);
+    </script>
+
+    <div class="nav-bar">
+        <a href="ticwk.html">TIC员工工作台</a>
+        <a href="javascript:logout()">退出登录</a>
+    </div>
+
+    <div class="manual-wrap">
+        <h1>TIC 项目技术手册</h1>
+        <div class="sub-title">版本：V1.3 | 更新日期：2026-11-01 | 前端静态网页版</div>
+
+        <h2>1. 项目概述</h2>
+        <p>TIC项目为一套纯前端静态网页系统，无需后端数据库，依靠浏览器内置 sessionStorage 完成登录状态临时保存，实现多档位权限工作台展示、等级卡片展示、页面跳转功能。整套项目可以部署在GitHub Pages、静态云服务器、本地文件夹直接打开运行。</p>
+        <p>本系统定位：内部实验人员登记展示平台，一共划分 L1/L2/L3/L4 四个档位，不同档位登录成功后，工作台页面自动展示对应档位文字信息以及档位卡片图片。</p>
+        <div class="tip">本项目全部文件都是静态文件，没有PHP、Java等后台程序，所有登录校验逻辑全部写在前端JS，适合演示、内部实训场景，不可直接用于正式生产涉密环境。</div>
+
+        <h2>2. 完整文件清单</h2>
+        <table>
+            <tr>
+                <th>文件名</th>
+                <th>类型</th>
+                <th>作用说明</th>
+            </tr>
+            <tr>
+                <td>index.html</td>
+                <td>网页</td>
+                <td>TIC项目首页，入口页面，可以跳转登录页</td>
+            </tr>
+            <tr>
+                <td>wklogin.html</td>
+                <td>网页</td>
+                <td>TIC登录页面，输入账号档位，写入sessionStorage</td>
+            </tr>
+            <tr>
+                <td>ticwk.html</td>
+                <td>网页</td>
+                <td>TIC员工工作台主页面，档位文字+档位卡片展示，准则、岗位说明、退出登录功能</td>
+            </tr>
+            <tr>
+                <td>contact.html</td>
+                <td>网页</td>
+                <td>TIC联系页面，展示负责人联系方式</td>
+            </tr>
+            <tr>
+                <td>ticte.html</td>
+                <td>网页</td>
+                <td>TIC技术手册页面（当前页），登录后方可查看</td>
+            </tr>
+            <tr>
+                <td>IMG_3062.jpeg ~ IMG_3065.jpeg</td>
+                <td>图片</td>
+                <td>TIC四个档位对应的身份卡片图片文件</td>
+            </tr>
+        </table>
+
+        <h2>3. 存储规范（sessionStorage）</h2>
+        <ul>
+            <li>userLevel：保存档位，可选值 L1 / L2 / L3 / L4</li>
+            <li>userAccount：保存登录填写的账号名称</li>
+        </ul>
+        <div class="warn">sessionStorage 在关闭浏览器之后自动清空，重新打开浏览器需要再次登录，不会永久保存。</div>
+
+        <h2>4. 页面跳转逻辑</h2>
+        <ol>
+            <li>访问 ticwk.html，检测无登录信息 → 跳转 wklogin.html</li>
+            <li>访问 ticte.html，检测无登录信息 → 跳转 wklogin.html</li>
+            <li>wklogin登录成功写入sessionStorage，可以选择跳转到工作台或者技术手册ticte.html</li>
+            <li>登录成功后，工作台、ticte.html技术手册可以互相来回跳转查看</li>
+            <li>点击退出登录，清除sessionStorage，回到登录页面</li>
+        </ol>
+
+        <h2>5. 故障排查清单</h2>
+        <ul>
+            <li>打开页面立刻跳登录页：未登录，或者浏览器session被清空</li>
+            <li>档位图片不显示：图片文件名写错，或者图片没有和html放同一个文件夹</li>
+            <li>退出登录无效：JS报错，检查logout函数</li>
+            <li>页面空白：文件损坏，重新复制完整代码</li>
+        </ul>
+
+        <h2>6. 版本更新记录</h2>
+        <ul>
+            <li>V1.0：基础TIC工作台页面，登录功能</li>
+            <li>V1.1：增加档位卡片图片展示，调换L2、L3图片映射关系</li>
+            <li>V1.2：新增TIC技术手册页面ticte.html</li>
+            <li>V1.3：手册增加登录鉴权，可以和工作台互相跳转，统一退出登录</li>
+        </ul>
+
+        <div class="footer-note">
+            TIC 内部文档 | 仅授权登录成员查阅
+        </div>
+    </div>
+
+<script>
+    // 统一退出登录函数，和工作台共用一套逻辑
+    function logout(){
+        sessionStorage.removeItem("userLevel");
+        sessionStorage.removeItem("userAccount");
+        location.href = "wklogin.html";
+    }
+</script>
+</body>
+</html>
