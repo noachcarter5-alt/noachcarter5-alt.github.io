@@ -101,7 +101,6 @@
             color:#2b5bcc;
             font-weight:bold;
         }
-        /* ========== 仅新增：等级卡片样式，原有样式不动 ========== */
         .card-img-wrap{
             text-align:center;
             margin-bottom:20px;
@@ -122,18 +121,15 @@
             <a href="javascript:logout()">退出登录</a>
         </div>
     </div>
-
     <div class="container">
         <div class="welcome-box">
             <h1>欢迎加入 TIC</h1>
             <p>你已成功登录员工工作台，请认真阅读员工手册相关规定，遵守各项管理要求。</p>
         </div>
-
         <div class="card">
             <h3>基本准则</h3>
             <p>所有TIC成员，应当秉持严谨、客观的态度完成各项工作，如实记录全部操作内容，不得擅自篡改数据、瞒报异常情况。工作交流保持文明，禁止私下传播内部资料。</p>
         </div>
-
         <div class="card">
             <h3>岗位与等级</h3>
             <p>TIC一共设置4个档位，每个档位包含多个可选岗位，档位凭证代表对应权限，权限不足时不可越级审批、核查。</p>
@@ -144,7 +140,6 @@
                 <li>L4 主管：复核结果、审批报告，统筹项目</li>
             </ul>
         </div>
-
         <div class="card">
             <h3>工作要求</h3>
             <ul>
@@ -154,18 +149,15 @@
                 <li>离职或者退出时，交还相关凭证，账号停用</li>
             </ul>
         </div>
-
         <div class="card">
             <h3>联系渠道</h3>
             <p>如有疑问，可以<a href="contact.html">联系我们</a>，联系负责人咨询相关问题。</p>
         </div>
         <div class="level-info" id="levelText"></div>
-        <!-- ========== 仅新增：等级卡片图片区域，放在等级文字后面 ========== -->
         <div class="card-img-wrap">
             <img class="level-card" id="levelCardImg" alt="档位卡片">
         </div>
     </div>
-
 <script>
     const menuBtn = document.getElementById('menuBtn');
     const dropMenu = document.getElementById('dropMenu');
@@ -177,14 +169,12 @@
             dropMenu.classList.remove('show');
         }
     })
-
     function logout(){
         sessionStorage.removeItem("userLevel");
         sessionStorage.removeItem("userAccount");
+        sessionStorage.removeItem("redirectTo");
         location.href = "wklogin.html";
     }
-
-    // 增加延时，解决页面加载太快读取session为空闪回登录页
     setTimeout(()=>{
         const userLv = sessionStorage.getItem("userLevel");
         const userAcc = sessionStorage.getItem("userAccount");
@@ -192,7 +182,6 @@
         const levelImgDom = document.getElementById("levelCardImg");
         let levelName = "";
         let imgSrc = "";
-
         if(userLv === "L1"){
             levelName = "基础LS";
             imgSrc = "IMG_3062.jpeg";
@@ -209,8 +198,8 @@
             levelName = "主管LF BE";
             imgSrc = "IMG_3065.jpeg";
         }
-
         if(!userLv){
+            sessionStorage.setItem("redirectTo","ticwk.html");
             location.href = "wklogin.html";
         }else{
             levelTextDom.innerText = `您的档位为：${userLv}（${levelName}），账号：${userAcc}`;
